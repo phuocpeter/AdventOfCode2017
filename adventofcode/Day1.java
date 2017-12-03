@@ -34,42 +34,8 @@ import java.util.ArrayList;
 public class Day1 {
     
     public Day1(String input) {
-        ArrayList<String> strings = partitionInput(input);
-        int count = 0;
-        for (int i = 0; i < strings.size(); i++) {
-            if (i == 0) {
-                count += count(strings.get(i));
-            } else {
-                count += count(strings.get(i), strings.get(i - 1));
-            }
-        }
-        if (strings.get(0).charAt(0) == strings.get(strings.size() - 1).charAt(strings.get(strings.size() - 1).length() - 1)) {
-            count += Integer.parseInt(strings.get(0).substring(0, 1));
-        }
+        int count = count(input);
         System.out.println("Result: " + count);
-    }
-    
-    private ArrayList<String> partitionInput(String input) {
-        ArrayList<String> temp = new ArrayList<>();
-        for (int i = 0; i < input.length(); i += 9) {
-            if (input.length() - i <= 9) {
-                temp.add(input.substring(i));
-            }
-            if (i + 9 < input.length()) {
-                temp.add(input.substring(i, i + 9));
-            }
-        }
-        System.out.printf("String authenticity: %b\n", checkAuthenticity(input, temp));
-        System.out.printf("InLen: %d\nArrLen: %d\n", input.length(), temp.size());
-        return temp;
-    }
-    
-    private boolean checkAuthenticity(String string, ArrayList<String> temp) {
-        StringBuilder sb = new StringBuilder();
-        for (String s: temp) {
-            sb.append(s);
-        }
-        return sb.toString().equals(string);
     }
     
     private int count(String string) {
@@ -80,15 +46,10 @@ public class Day1 {
                 count += Integer.parseInt(string.substring(i, i + 1));
             }
         }
-        System.out.printf("String: %s, Count: %d\n", string, count);
-        return count;
-    }
-    
-    private int count(String string, String prevString) {
-        int count = count(string);
-        if (prevString.charAt(prevString.length() - 1) == string.charAt(0)) {
+        if (string.charAt(0) == string.charAt(string.length() - 1)) {
             count += Integer.parseInt(string.substring(0, 1));
         }
+        System.out.printf("String: %s, Count: %d\n", string, count);
         return count;
     }
     
