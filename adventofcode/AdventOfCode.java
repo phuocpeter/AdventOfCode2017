@@ -6,6 +6,7 @@
 package adventofcode;
 
 import adventofcode.Day1;
+import java.io.*;
 
 /**
  *
@@ -18,6 +19,12 @@ public class AdventOfCode {
      */
     public static void main(String[] args) {
         doPart1();
+        try {
+            Day2 day2 = new Day2(new File("input2.txt"));
+            day2.printResult();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
     
     public static void doPart1() {
