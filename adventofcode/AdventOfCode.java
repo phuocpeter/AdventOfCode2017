@@ -21,7 +21,8 @@ public class AdventOfCode {
         doPart1();
         try {
             Day2 day2 = new Day2(new File("input2.txt"));
-            day2.printResult();
+            day2.printResult(Day2.PARTONE);
+            day2.printResult(Day2.PARTTWO);
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
