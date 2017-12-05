@@ -1,31 +1,8 @@
-/* --- PART ONE ---
- * The captcha requires you to review a sequence of digits (your puzzle input)
- * and find the sum of all digits that match the next digit in the list. 
- * The list is circular, so the digit after the last digit is the first digit in 
- * the list.
- * For example:
- *  - 1122 produces a sum of 3 (1 + 2) because the first digit (1) matches the 
- *      second digit and the third digit (2) matches the fourth digit.
- *  - 1111 produces 4 because each digit (all 1) matches the next.
- *  - 1234 produces 0 because no digit matches the next.
- *  - 91212129 produces 9 because the only digit that matches the next one is
- *      the last digit, 9.
- * Now, instead of considering the next digit, it wants you to consider the 
- * digit halfway around the circular list. That is, if your list contains 10 
- * items, only include a digit in your sum if the digit 10/2 = 5 steps forward 
- * matches it. Fortunately, your list has an even number of elements.
+/* 
+ * This class solves both parts of Day 1.
+ */
 
-For example:
-
-1212 produces 6: the list contains 4 items, and all four digits match the digit 2 items ahead.
-1221 produces 0, because every comparison is between a 1 and a 2.
-123425 produces 4, because both 2s match each other, but no other digit has a match.
-123123 produces 12.
-12131415 produces 4.
-*/
 package adventofcode;
-
-import java.util.ArrayList;
 
 /**
  *
@@ -33,12 +10,46 @@ import java.util.ArrayList;
  */
 public class Day1 {
     
+    public final static int PARTONE = 1;
+    public final static int PARTTWO = 2;
+    
+    private final int result1;
+    private final int result2;
+    
+    /**
+     * Constructs the day1 solver.
+     * @param input the string input.
+     */
     public Day1(String input) {
-        int count = count(input);
-        System.out.println("Result: " + count);
+        result1 = count1(input);
+        result2 = count2(input);
     }
     
-    private int count(String string) {
+    /**
+     * Prints out the result
+     * @param part the part of the result to get.
+     */
+    public void printResult(int part) {
+        System.out.printf("Day 1 part %d: ", part);
+        switch (part) {
+            case PARTONE:
+                System.out.printf("%d\n", result1);
+                break;
+            case PARTTWO:
+                System.out.printf("%d\n", result2);
+                break;
+            default:
+                System.out.println("N/A\n");
+                break;
+        }
+    }
+    
+    /**
+     * Computes part one.
+     * @param string the input.
+     * @return the result.
+     */
+    private int count1(String string) {
         int count = 0;
         for (int i = 0; i < string.length(); i++) {
             if (i + 1 >= string.length()) { break; }
@@ -49,7 +60,26 @@ public class Day1 {
         if (string.charAt(0) == string.charAt(string.length() - 1)) {
             count += Integer.parseInt(string.substring(0, 1));
         }
-        System.out.printf("String: %s, Count: %d\n", string, count);
+        return count;
+    }
+
+    /**
+     * Computes part two.
+     * @param string the input.
+     * @return the result.
+     */
+    private int count2(String string) {
+        int count = 0;
+        int mid = string.length() / 2;
+        for (int i = 0; i < string.length(); i++) {
+            int compareIndex = i + mid;
+            if (compareIndex >= string.length()) { 
+                compareIndex = compareIndex - string.length();
+            }
+            if (string.charAt(i) == string.charAt(compareIndex)) {
+                count += Integer.parseInt(string.substring(i, i + 1));
+            }
+        }
         return count;
     }
     
