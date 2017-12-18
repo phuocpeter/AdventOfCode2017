@@ -29,6 +29,7 @@ public class Day5 {
         while (scanner.hasNextLine()) {
             instruction.add(Integer.valueOf(scanner.nextLine()));
         }
+        // Get a new copy of the instruction list
         ArrayList<Integer> input2 = new ArrayList<>(instruction);
         result1 = runInstruction1(instruction);
         result2 = runInstruction2(input2);
