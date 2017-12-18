@@ -26,6 +26,9 @@ public class AdventOfCode {
             Day4 day4 = new Day4(new File("input4.txt"));
             day4.printResult(Day4.PARTONE);
             day4.printResult(Day4.PARTTWO);
+            Day5 day5 = new Day5(new File("input5.txt"));
+            day5.printResult(Day5.PARTONE);
+            day5.printResult(Day5.PARTTWO);
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
